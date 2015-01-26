@@ -1,69 +1,65 @@
-int payoff  = [-3, -1, 1, 3]
+# payoffs
+sucker = -3
+defect = -1
+coop = 1
+suckee  = 3
 
-int defect  = 0
-int sucker  = 1
-int coop = 2
-int suckee  = 3
+# quaternary() setup
+ones = 0
+fours = 0
 
-int ones = 0
-int fours = 0
+# <WIP>
+# all previous outcomes and results
+history = []
 
-int choiceA
-int choiceB
+# first-level nested lists
+outcomes = 0
+payoffs = 1
 
-tit = 1
+# second-level nested lists (payoffs)
+allC = 0
+allD = 1
+fiftyfifty = 2
+titfortat = 3
+# </WIP>
 
-round = 0
+round = 1
 
-def outcome(choiceA, choiceB)
-    if(A == 0)
-        if(B == 0)
-            return [ payoff[defect], payoff[defect] ]
-        if(B == 1)
-            return [ payoff[suckee], payoff[sucker] ]
-    if(A == 1)
-        if(B == 0)
-            return [ payoff[sucker], payoff[suckee] ]
-        if(B == 0)
-            return [ payoff[coop], payoff[coop] ]
+def outcome(choiceA, choiceB): # the definition of prisoner's dilemma
+    if A == 0:
+        if B == 0:
+            return [defect, defect]
+        if B == 1:
+            return [suckee, sucker]
+    if A == 1:
+        if B == 0:
+            return [sucker, suckee]
+        if B == 0:
+            return [coop, coop]
 
-def allC()
+def allC(): # all cooperate
     return 1
 
-def allD()
+def allD(): # all defect
     return 0
 
-def fiftyfifty()
+def fiftyfifty(): # random with p = 0.5
     return choose(0, 1)
 
-def titfortat(tit)
-    int tat = tit
-    return tat
+def titfortat(): # cooperates the first round and returns what the opponent played the previous round every round after
+    if round == 1:
+        return 1
+    elif playerA == "titfortat":
+        return history[outcomes][titfortat][len(titfortat-1)][1] # WIP
+    else:
+        return history[outcomes][titfortat][len(titfortat-1)][0] # WIP
 
-def quaternary
+# <WIP>
+def quaternary(): # chooses matchups
     ones++
-    if(ones == 4)
+    if ones == 4):
         ones = 0
         fours++
-    if(ones + fours == 6)
+    if ones + fours == 6:
         ones, fours = 0
-
-def matchup(playerA, playerB)
-    print(playerA + " vs. " + playerB + ": ", end = "")
-    if(playerA == "allC")
-       choiceA =   allC()
-    if(playerA == "allD")
-       choiceA =   allD()
-    if(playerA == "fiftyfifty")
-       choiceA =   fiftyfifty()
-    if(playerB == "allC")
-       choiceB =   allC()
-    if(playerB == "allD")
-       choiceB =   allD()
-    if(playerB == "fiftyfifty")
-       choiceB =   fiftyfifty()
-    if(playerA == "titfortat")
-        if(round == 0 || playerB == "allC" || playerB == "titfortat")
-            return titfortat( 1 )
-        if(round == 1 && playerB == "allD")
-            return titfortat( allD() )
+# </WIP>
